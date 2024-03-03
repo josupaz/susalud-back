@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BreedsModule } from './breeds/breeds.module';
-import { CatsModule } from './cats/cats.module';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { SwaggerModule, DocumentBuilder, OpenAPIObject } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';
+import { DoctorModule } from './doctor/doctor.module';
+import { PacienteModule } from './paciente/paciente.module';
+import { TurnoModule } from './turno/turno.module';
 
 @Module({
   imports: [
@@ -13,16 +14,17 @@ import { NestFactory } from '@nestjs/core';
       type: 'mysql',
       host: 'localhost',
       port: 3307,
-      username: 'admin',
+      username: 'user_crud',
       password: 'root',
-      database: 'su-salud-db',
+      database: 'db_crud',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: true
     }),
-    CatsModule,
-    BreedsModule,
-    UsersModule,
+    UserModule,
     AuthModule,
+    DoctorModule,
+    PacienteModule,
+    TurnoModule,
   ],
   controllers: [],
   providers: [],
@@ -31,7 +33,7 @@ export class AppModule {
   static async configure() {
     const app = await NestFactory.create(AppModule);
     const config = new DocumentBuilder()
-      .setTitle('API Documentation susalud back')
+      .setTitle('API susalud back')
       .setDescription('API Documentation susalud back')
       .setVersion('1.0')
       .build();

@@ -1,4 +1,6 @@
 export enum Role {
-  USER = 'user',
   ADMIN = 'admin',
+  USER_INTERNO = 'user_interno',
+  USER_EXTERNO = 'user_externo',
+  
 }

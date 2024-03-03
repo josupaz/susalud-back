@@ -9,13 +9,6 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-interface RequestWithUser extends Request {
-  user: {
-    email: string;
-    role: string;
-  };
-}
-
 @ApiTags('Usuario')
 @Controller('auth')
 export class AuthController {
@@ -38,7 +31,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  @Auth(Role.USER)
+  @Auth( Role.ADMIN , Role.USER_INTERNO , Role.USER_EXTERNO )
   profile(@ActiveUser() user: UserActiveInterface) {
     return this.authService.profile(user);
   }
